@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Intelligent Group Formatter</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f9; margin: 0; }
+        .login-card { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 350px; text-align: center; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        button { background: #2196f3; color: white; border: none; padding: 10px; width: 100%; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        button:hover { background: #1976d2; }
+        h2 { color: #333; margin-top: 0; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2>System Login</h2>
+        <p style="color: #666; font-size: 0.9em; margin-bottom: 20px;">Intelligent Group Formatter</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            {% if form.errors %}
+                <p style="color: red; font-size: 0.8em;">Your username and password didn't match.</p>
+            {% endif %}
+            
+            <div style="text-align: left;">
+                <label style="font-size: 0.8em; font-weight: bold;">Username</label>
+                {{ form.username }}
+            </div>
+            
+            <div style="text-align: left;">
+                <label style="font-size: 0.8em; font-weight: bold;">Password</label>
+                {{ form.password }}
+            </div>
+
+            <button type="submit">Sign In</button>
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+        <p style="font-size: 0.9em; margin-top: 20px;">
+    Don't have an account? <a href="{% url 'signup' %}" style="color: #2196f3; text-decoration: none;">Sign up here</a>
+</p>
+    </div>
+</body>
+</html>

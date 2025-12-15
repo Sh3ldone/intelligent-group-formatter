@@ -117,3 +117,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Redirect to home page after login (change 'home' to your actual home URL name)
+LOGIN_REDIRECT_URL = '/' 
+
+# Redirect to home page after logout
+LOGOUT_REDIRECT_URL = '/accounts/login/'
