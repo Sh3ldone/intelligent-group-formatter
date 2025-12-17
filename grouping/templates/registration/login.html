@@ -3,41 +3,99 @@
 <head>
     <title>Login - Intelligent Group Formatter</title>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f9; margin: 0; }
-        .login-card { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 350px; text-align: center; }
-        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        button { background: #2196f3; color: white; border: none; padding: 10px; width: 100%; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 10px; }
-        button:hover { background: #1976d2; }
-        h2 { color: #333; margin-top: 0; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            background-color: #121212; /* Dark Background */
+            margin: 0; 
+            color: #e0e0e0;
+        }
+        .login-card { 
+            background: #1e1e1e; /* Dark Card */
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5); 
+            width: 100%; 
+            max-width: 380px; 
+            text-align: center; 
+            border: 1px solid #333;
+            border-top: 5px solid #ff9800; /* Orange Accent */
+        }
+        
+        h2 { color: #ff9800; margin-top: 0; margin-bottom: 10px; }
+        p.subtitle { color: #aaa; font-size: 0.9em; margin-bottom: 30px; }
+
+        label { display: block; text-align: left; margin-bottom: 5px; color: #ccc; font-size: 0.9em;}
+        
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 20px; 
+            border: 1px solid #444; 
+            border-radius: 6px; 
+            background: #2d2d2d; 
+            color: white; 
+            box-sizing: border-box; 
+            transition: border-color 0.2s;
+        }
+        input:focus { outline: none; border-color: #ff9800; }
+
+        button { 
+            background: #ff9800; 
+            color: #000; 
+            border: none; 
+            padding: 12px; 
+            width: 100%; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: bold;
+            margin-top: 10px; 
+            transition: opacity 0.2s;
+        }
+        button:hover { opacity: 0.9; }
+
+        .links { margin-top: 20px; font-size: 0.85em; color: #888; }
+        .links a { color: #ff9800; text-decoration: none; }
+        .links a:hover { text-decoration: underline; }
+        
+        .error-msg { color: #ff5252; font-size: 0.8em; margin-bottom: 15px; }
     </style>
 </head>
 <body>
     <div class="login-card">
         <h2>System Login</h2>
-        <p style="color: #666; font-size: 0.9em; margin-bottom: 20px;">Intelligent Group Formatter</p>
+        <p class="subtitle">Intelligent Group Formatter</p>
         
         <form method="post">
             {% csrf_token %}
+            
             {% if form.errors %}
-                <p style="color: red; font-size: 0.8em;">Your username and password didn't match.</p>
+                <p class="error-msg">⚠️ Invalid username or password.</p>
             {% endif %}
             
             <div style="text-align: left;">
-                <label style="font-size: 0.8em; font-weight: bold;">Username</label>
+                <label>Username</label>
                 {{ form.username }}
             </div>
             
             <div style="text-align: left;">
-                <label style="font-size: 0.8em; font-weight: bold;">Password</label>
+                <label>Password</label>
                 {{ form.password }}
             </div>
 
             <button type="submit">Sign In</button>
             <input type="hidden" name="next" value="{{ next }}">
         </form>
-        <p style="font-size: 0.9em; margin-top: 20px;">
-    Don't have an account? <a href="{% url 'signup' %}" style="color: #2196f3; text-decoration: none;">Sign up here</a>
-</p>
+        
+        <div class="links">
+            <a href="#">Forgot Password?</a>
+            <br><br>
+            Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>
+        </div>
     </div>
 </body>
 </html>
