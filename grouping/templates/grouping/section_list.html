@@ -1,13 +1,45 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>My Classes - Intelligent Group Formatter</title>
     <style>
         /* DARK THEME CORE */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #121212; color: #e0e0e0; margin: 0; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            padding: 20px; 
+            margin: 0; 
+            color: #e0e0e0; 
+
+            /* --- BACKGROUND SETTINGS --- */
+            background-color: #121212; 
+            
+            /* Watermark Effect */
+            background-image: 
+                linear-gradient(rgba(18, 18, 18, 0.4), rgba(18, 18, 18, 0.4)),
+                url("{% static 'images/Dashboard.png' %}"); 
+            
+            background-repeat: no-repeat;
+            background-position: 50% center; 
+            background-size: cover; 
+            background-attachment: fixed; /* Keeps logo still while scrolling */
+        }
         
         /* HEADER STYLES */
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding: 0 20px; border-bottom: 1px solid #333; padding-bottom: 20px; }
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 30px; 
+            padding: 0 20px; 
+            border-bottom: 1px solid #333; 
+            padding-bottom: 20px; 
+            
+            /* Add a background to header to make text readable over logo */
+            background: rgba(18, 18, 18, 0.8); 
+            backdrop-filter: blur(5px); /* Optional: Adds a cool blur effect */
+            border-radius: 8px;
+        }
         h1, h2, h3 { color: #ffffff; }
         
         .btn-logout { background: #333; color: white; padding: 8px 15px; border: 1px solid #555; border-radius: 4px; cursor: pointer; transition: background 0.2s; }
@@ -17,7 +49,18 @@
         .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
         
         /* CARD STYLES */
-        .card { background: #1e1e1e; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); margin-bottom: 25px; border: 1px solid #333; }
+        .card { 
+            background: #1e1e1e; 
+            padding: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
+            margin-bottom: 25px; 
+            border: 1px solid #333; 
+            
+            /* Ensure cards sit on top of background */
+            position: relative;
+            z-index: 10;
+        }
         
         /* FORM STYLES */
         input[type="text"] { 
@@ -55,15 +98,19 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
             overflow: hidden; 
             transition: transform 0.2s;
-            border-top: 5px solid #ff9800; /* ORANGE top border accent */
+            border-top: 5px solid #ff9800; 
             border-left: 1px solid #333;
             border-right: 1px solid #333;
             border-bottom: 1px solid #333;
+            
+            /* Ensure cards sit on top of background */
+            position: relative;
+            z-index: 10;
         }
         .section-card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(255, 152, 0, 0.15); }
         
         .section-body { padding: 20px; text-align: center; }
-        .section-title { margin: 0 0 10px 0; color: #ff9800; font-size: 1.5em; } /* Orange Title */
+        .section-title { margin: 0 0 10px 0; color: #ff9800; font-size: 1.5em; } 
         .section-info { color: #aaa; font-size: 0.9em; margin-bottom: 20px; }
         
         /* STUDENT COUNT BADGE */
@@ -93,7 +140,7 @@
         .btn-delete {
             background: none; 
             border: none; 
-            color: #cf6679; /* Soft Red */
+            color: #cf6679; 
             cursor: pointer; 
             font-size: 1.5em;
             transition: color 0.2s;

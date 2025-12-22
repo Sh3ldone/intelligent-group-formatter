@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,12 +10,25 @@
             justify-content: center; 
             align-items: center; 
             height: 100vh; 
-            background-color: #121212; /* Dark Background */
             margin: 0; 
             color: #e0e0e0;
+
+            /* --- NEW BACKGROUND SETTINGS --- */
+            background-color: #121212; /* Your original dark background */
+            
+            /* This creates the dark "Watermark" effect */
+            background-image: 
+                linear-gradient(rgba(18, 18, 18, 0.4), rgba(18, 18, 18, 0.4)),
+                url("{% static 'images/logoss.png' %}"); 
+            
+            background-repeat: no-repeat;
+            background-position: 50% center; /* Positions logo to the right */
+            background-size: cover; /* Adjust this number to make the logo bigger/smaller */
+            background-attachment: fixed;
         }
+
         .login-card { 
-            background: #1e1e1e; /* Dark Card */
+            background: #1e1e1e; 
             padding: 40px; 
             border-radius: 12px; 
             box-shadow: 0 10px 25px rgba(0,0,0,0.5); 
@@ -22,7 +36,11 @@
             max-width: 380px; 
             text-align: center; 
             border: 1px solid #333;
-            border-top: 5px solid #ff9800; /* Orange Accent */
+            border-top: 5px solid #ff9800; 
+            
+            /* Ensures card stays on top of the background image */
+            position: relative; 
+            z-index: 10; 
         }
         
         h2 { color: #ff9800; margin-top: 0; margin-bottom: 10px; }
