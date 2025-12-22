@@ -4,29 +4,37 @@
     <title>Intelligent Group Formatter</title>
     <style>
         /* DARK THEME CORE */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #121212; color: #e0e0e0; margin: 0; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            padding: 20px 20px 100px 20px; 
+            background-color: #121212; 
+            color: #e0e0e0; 
+            margin: 0; 
+        }
         
         /* HEADERS */
-        h1, h2, h3 { color: #ffffff; }
+        h1, h2, h3, h4 { color: #ffffff; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 0 20px; border-bottom: 1px solid #333; padding-bottom: 20px; }
         
         /* LAYOUT */
         .main-wrapper { display: flex; gap: 20px; padding: 0 20px; align-items: flex-start; }
-        .sidebar { width: 320px; flex-shrink: 0; display: flex; flex-direction: column; gap: 20px; }
+        .sidebar { width: 340px; flex-shrink: 0; display: flex; flex-direction: column; gap: 20px; } 
         .content { flex: 1; min-width: 0; } 
         
         /* DARK CARDS */
         .card { background: #1e1e1e; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); border: 1px solid #333; }
         
-        /* GROUP CARDS - The "Orange & Black" Look */
+        /* GROUP CARDS */
         .group-container { display: flex; flex-wrap: wrap; gap: 20px; }
         .group-card { 
             flex: 1; min-width: 300px; 
-            background: #252525; /* Slightly lighter black */
+            background: #252525; 
             padding: 15px; 
             border-radius: 8px; 
-            border: 1px solid #ff9800; /* ORANGE BORDER */
+            border: 1px solid #ff9800; 
             box-shadow: 0 2px 8px rgba(255, 152, 0, 0.1);
+            display: flex;
+            flex-direction: column;
         }
 
         /* STUDENT LIST ITEMS */
@@ -36,17 +44,19 @@
             padding: 10px; 
             margin: 8px 0; 
             border-radius: 6px; 
-            border-left: 4px solid #ff9800; /* Orange accent */
+            border-left: 4px solid #ff9800; 
         }
 
         /* BADGES */
         .badge { background: #ff9800; color: #000; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; font-weight: bold; }
         
-        /* ALERTS (Keep these readable) */
+        /* SKILL PILLS */
+        .skill-pill { font-size: 0.7em; color: #aaa; margin-left: 3px; }
+        .skill-val { color: #ff9800; font-weight: bold; }
+
+        /* ALERTS */
         .status-ok { font-size: 0.8em; background: #1b5e20; color: #a5d6a7; padding: 3px 10px; border-radius: 4px; border: 1px solid #2e7d32; }
-        .status-bad { font-size: 0.8em; background: #b71c1c; color: #ffcdd2; padding: 3px 10px; border-radius: 4px; border: 1px solid #c62828; font-weight: bold;}
-        .suggestion-box { margin-top: 5px; font-size: 0.8em; color: #ffecb3; background-color: #42380d; border: 1px solid #ffca28; padding: 6px; border-radius: 4px; display: block;}
-        .weakness-badge { margin-top: 5px; font-size: 0.8em; color: #ffab91; background: #3e2723; padding: 2px 8px; border-radius: 4px; border: 1px solid #d84315; display: inline-block; }
+        /* Removed .status-bad and .suggestion-box styles as they are no longer needed */
 
         /* INPUTS */
         input[type="text"], input[type="number"], select { 
@@ -64,8 +74,8 @@
         button { border: none; border-radius: 4px; cursor: pointer; font-size: 14px; padding: 10px 15px; font-weight: bold; transition: opacity 0.2s; }
         button:hover { opacity: 0.9; }
 
-        .btn-add { background: #ff9800; color: #000; width: 100%; margin-top: 10px; font-size: 16px;} /* Main Orange Action */
-        .btn-gen { background: #ff9800; color: #000; width: 100%; margin-top: 10px; font-size: 16px;} /* Main Orange Action */
+        .btn-add { background: #ff9800; color: #000; width: 100%; margin-top: 10px; font-size: 16px;} 
+        .btn-gen { background: #ff9800; color: #000; width: 100%; margin-top: 10px; font-size: 16px;} 
         
         .btn-del { background: #cf6679; color: black; font-size: 12px; padding: 5px 10px; }
         .btn-reset { background: #cf6679; color: black; padding: 8px 15px; }
@@ -77,7 +87,7 @@
             position: fixed; 
             bottom: 30px; 
             right: 30px; 
-            background: #ff9800; /* Orange */
+            background: #ff9800; 
             color: #000; 
             padding: 15px 25px; 
             text-decoration: none; 
@@ -142,6 +152,19 @@
                 </form>
             </div>
 
+            <div class="card" style="padding: 15px; border: 1px solid #444;">
+                <h4 style="margin-top:0; color: #ff9800; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px; font-size: 1em;">
+                    📝 Skill Assessment Rubric
+                </h4>
+                <ul style="padding-left: 20px; margin: 0; font-size: 0.8em; color: #aaa; line-height: 1.5;">
+                    <li><strong style="color:#ff9800;">1 - Beginner:</strong> Little to no prior experience.</li>
+                    <li><strong style="color:#ff9800;">2 - Novice:</strong> Basic knowledge, needs help.</li>
+                    <li><strong style="color:#ff9800;">3 - Competent:</strong> Can work independently.</li>
+                    <li><strong style="color:#ff9800;">4 - Proficient:</strong> Strong skill, problem solver.</li>
+                    <li><strong style="color:#ff9800;">5 - Expert:</strong> Mastery level, can lead/teach.</li>
+                </ul>
+            </div>
+
             <div class="card">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <h3 style="margin:0;">Class Roster</h3>
@@ -153,15 +176,26 @@
                     <div style="max-height: 400px; overflow-y: auto; margin-bottom: 10px; padding-right: 5px;">
                         {% for s in all_students %}
                         <div class="student-row">
-                            <div style="display:flex; align-items:center; gap: 10px;">
-                                <input type="checkbox" name="student_ids" value="{{ s.id }}" style="width: auto;"> 
-                                <strong>{{ s.name }}</strong>
+                            <div style="display:flex; flex-direction: column;">
+                                <div style="display:flex; align-items:center; gap: 8px;">
+                                    <input type="checkbox" name="student_ids" value="{{ s.id }}" style="width: auto;"> 
+                                    <strong>{{ s.name }}</strong>
+                                </div>
+                                <div style="margin-left: 25px; margin-top: 2px;">
+                                    <span class="skill-pill">C:<span class="skill-val">{{ s.coding }}</span></span>
+                                    <span class="skill-pill">D:<span class="skill-val">{{ s.design }}</span></span>
+                                    <span class="skill-pill">W:<span class="skill-val">{{ s.writing }}</span></span>
+                                    <span class="skill-pill">S:<span class="skill-val">{{ s.presenting }}</span></span>
+                                </div>
                             </div>
-                            {% if s.assigned_group %}
-                                <span style="font-size:0.7em; background:#333; color: #ff9800; padding:2px 5px; border-radius:3px; border: 1px solid #555;">{{ s.assigned_group.name }}</span>
-                            {% else %}
-                                <span style="font-size:0.7em; color:#666;">Unassigned</span>
-                            {% endif %}
+                            
+                            <div>
+                                {% if s.assigned_group %}
+                                    <span style="font-size:0.7em; background:#333; color: #ff9800; padding:2px 5px; border-radius:3px; border: 1px solid #555;">{{ s.assigned_group.name }}</span>
+                                {% else %}
+                                    <span style="font-size:0.7em; color:#666;">Unassigned</span>
+                                {% endif %}
+                            </div>
                         </div>
                         {% empty %}
                         <p style="color:#666; text-align:center; font-style:italic;">No students added yet.</p>
@@ -203,18 +237,7 @@
                         <div>
                             <h3 style="margin: 0; color: #ff9800;">{{ item.group.name }}</h3>
                             <div style="margin-top: 5px; display:flex; flex-direction:column; align-items:flex-start;">
-                                {% if item.is_unbalanced %}
-                                    <span class="status-bad">⚠️ Unbalanced (Dev: ±{{ item.compatibility_score|floatformat:1 }})</span>
-                                    <span class="suggestion-box">💡 {{ item.suggestion }}</span>
-                                {% else %}
-                                    <span class="status-ok">✔ Balanced (Dev: ±{{ item.compatibility_score|floatformat:1 }})</span>
-                                {% endif %}
-
-                               {% if item.weakness %}
-    <span class="weakness-badge">
-        📉 Weakest: <strong>{{ item.weakness }}</strong>
-    </span>
-{% endif %}
+                                <span class="status-ok">✔ Balanced</span>
                             </div>
                         </div>
                         <div style="width: 140px; height: 140px;">
@@ -224,28 +247,42 @@
                     
                     <hr style="border: 0; border-top: 1px solid #444; margin: 10px 0;">
 
-                    {% for student in item.group.students.all %}
-                    <div class="student-item">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="color: #e0e0e0;">{{ student.name }}</span>
-                            <span class="badge">{{ student.coding|add:student.design|add:student.writing|add:student.presenting }} pts</span>
+                    <div style="flex: 1;">
+                        {% for student in item.group.students.all %}
+                        <div class="student-item">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: #e0e0e0;">{{ student.name }}</span>
+                                <span style="font-size:0.75em; color:#aaa;">
+                                    C:<b style="color:#ff9800">{{ student.coding }}</b> 
+                                    D:<b style="color:#ff9800">{{ student.design }}</b> 
+                                    W:<b style="color:#ff9800">{{ student.writing }}</b> 
+                                    S:<b style="color:#ff9800">{{ student.presenting }}</b>
+                                </span>
+                            </div>
+                            <form action="{% url 'move_student' section.id student.id %}" method="POST" style="margin-top: 5px; display: flex; gap: 5px;">
+                                {% csrf_token %}
+                                <select name="new_group_id" style="font-size: 0.8em; padding: 5px; width:100%;">
+                                    <option value="" disabled selected>Move...</option>
+                                    {% for g in group_data %}
+                                        {% if g.group.id != item.group.id %}
+                                            <option value="{{ g.group.id }}">{{ g.group.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                                <button type="submit" class="btn-go">Go</button>
+                            </form>
                         </div>
-                        <form action="{% url 'move_student' section.id student.id %}" method="POST" style="margin-top: 5px; display: flex; gap: 5px;">
-                            {% csrf_token %}
-                            <select name="new_group_id" style="font-size: 0.8em; padding: 5px; width:100%;">
-                                <option value="" disabled selected>Move...</option>
-                                {% for g in group_data %}
-                                    {% if g.group.id != item.group.id %}
-                                        <option value="{{ g.group.id }}">{{ g.group.name }}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                            <button type="submit" class="btn-go">Go</button>
-                        </form>
+                        {% empty %}
+                        <p style="color:#666; font-style:italic;">Empty Group</p>
+                        {% endfor %}
                     </div>
-                    {% empty %}
-                    <p style="color:#666; font-style:italic;">Empty Group</p>
-                    {% endfor %}
+
+                    <div style="margin-top: 15px; border-top: 1px dashed #444; padding-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 0.9em; color: #aaa;">Total Group Power:</span>
+                        <span style="font-size: 1.2em; font-weight: bold; color: #ff9800;">
+                            {{ item.skill_values.0|add:item.skill_values.1|add:item.skill_values.2|add:item.skill_values.3 }} pts
+                        </span>
+                    </div>
 
                     <script>
                         (function() {
@@ -260,8 +297,8 @@
                                     datasets: [{
                                         data: skillsData, 
                                         fill: true, 
-                                        backgroundColor: 'rgba(255, 152, 0, 0.2)', // Orange Fill
-                                        borderColor: '#ff9800', // Orange Line
+                                        backgroundColor: 'rgba(255, 152, 0, 0.2)', 
+                                        borderColor: '#ff9800', 
                                         pointBackgroundColor: '#ff9800',
                                         pointRadius: 3,
                                     }]
@@ -272,9 +309,9 @@
                                             suggestedMin: 0, 
                                             suggestedMax: 20, 
                                             ticks: { display: false, backdropColor: 'transparent' },
-                                            grid: { color: '#444' }, // Dark grid lines
+                                            grid: { color: '#444' }, 
                                             angleLines: { color: '#444' },
-                                            pointLabels: { color: '#aaa', font: {size: 10} } // Light text labels
+                                            pointLabels: { color: '#aaa', font: {size: 10} } 
                                         } 
                                     }, 
                                     plugins: { legend: { display: false } }

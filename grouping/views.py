@@ -4,10 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from .models import Group, Student, Section
 from .services import generate_groups
-from .forms import StudentForm, SectionForm, TeacherSignUpForm # <--- Added TeacherSignUpForm
+from .forms import StudentForm, SectionForm, TeacherSignUpForm  
 import statistics
 
-# --- SECTION MANAGEMENT ---
+ 
 
 @login_required
 def section_list(request):
@@ -114,8 +114,20 @@ def trigger_generation(request, section_id):
             'w': int(request.POST.get('weight_w', 1)),
             'p': int(request.POST.get('weight_p', 1)),
         }
-        # Pass the section to the service
+        
+        # --- NEW LOGIC: FORCE RESET ---
+        # 1. Check if we already have groups.
+        existing_groups = Group.objects.filter(section=section)
+        
+        # 2. If the user is asking for a DIFFERENT number of groups (e.g., has 2, asks for 3)
+        #    OR if they clicked the button (implying they want a re-do),
+        #    we delete the old ones first.
+        if existing_groups.exists():
+            existing_groups.delete()  # <--- Force Delete old groups
+            
+        # 3. Now call the service (The Safety Check in services.py won't block us because we deleted them)
         generate_groups(section, k_value, weights)
+        
     return redirect('dashboard', section_id=section_id)
 
 @login_required
